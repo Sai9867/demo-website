@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oralix- Webflow HTML Website Template.</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #0ABFB5;
+    --teal-light: #e6faf9;
+    --dark: #0D1B1E;
+    --dark2: #1a2c30;
+    --text: #3a4a4d;
+    --text-light: #6b8083;
+    --white: #ffffff;
+    --bg: #f4fafa;
+    --border: #d4eae9;
+    --accent: #f0fffe;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background:transparent;
+    backdrop-filter: blur(12px);
+   
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 76px;
+  }
+  .nav-logo img { height: 36px; }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a { color: var(--dark); font-size: 15px; font-weight: 500; text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-contact { color: var(--dark); font-size: 15px; font-weight: 500; text-decoration: none; }
+  .nav-contact:hover { color: var(--teal); }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--teal); color: #fff;
+    padding: 12px 22px; border-radius: 50px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background .2s, transform .2s;
+    white-space: nowrap;
+  }
+  .btn-primary:hover { background: #089991; transform: translateY(-1px); }
+  .btn-primary .arrow { font-size: 13px; }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--teal);
+    padding: 12px 22px; border-radius: 50px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; border: 2px solid var(--teal); cursor: pointer;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .btn-outline:hover { background: var(--teal); color: #fff; }
+
+  /* HERO */
+  .hero {
+    padding-top: 76px;
+    min-height: 100vh;
+    background-image:url("68a6ece0d25cca7b638324a2_cxcd.webp");
+    background-position: center; background-repeat: no-repeat;
+    background-size: cover;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(5, 2, 2, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-left {
+    padding: 80px 5% 80px 7%;
+    position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(10,191,181,0.12); border: 1px solid rgba(10,191,181,0.3);
+    border-radius: 50px; padding: 8px 16px; margin-bottom: 28px;
+  }
+  .hero-badge-icon { width: 28px; height: 28px; border-radius: 50%; }
+  .hero-badge span { color: #fff; font-size: 13px; font-weight: 500; }
+  .hero-title {
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 800; line-height: 1.1;
+    color: #fff; margin-bottom: 32px;
+    letter-spacing: -1.5px;
+  }
+  .hero-title span { color: var(--teal); }
+
+  /* Typewriter */
+  .typewriter {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid rgba(255,255,255,0.75);
+    animation: blink-cursor 0.75s step-end infinite;
+  }
+  @keyframes blink-cursor {
+    50% { border-color: transparent; }
+  }
+
+  .hero-features { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+  .hero-feature {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 16px 20px;
+  }
+  .hero-feature-icon { width: 36px; height: 36px; flex-shrink: 0; }
+  .hero-feature-text h4 { color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .hero-feature-text p { color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.5; }
+  .hero-cta { display: flex; gap: 14px; align-items: center; }
+  .btn-hero {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--teal); color: #fff;
+    padding: 16px 28px; border-radius: 50px;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none; transition: all .2s;
+  }
+  .btn-hero:hover { background: #089991; transform: translateY(-2px); }
+
+  .hero-right {
+    position: relative; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-img {
+    width: 90%; height: 85vh;
+    object-fit: cover; border-radius: 24px 0 0 24px;
+    position: relative; z-index: 1;
+  }
+  .hero-stats {
+    position: absolute; bottom: 60px; left: -30px; z-index: 3;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+    border-radius: 16px; padding: 20px 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    display: flex; gap: 24px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-size: 24px; font-weight: 800; color: var(--teal); line-height: 1; }
+  .hero-stat-label { font-size: 11px; color: var(--text-light); margin-top: 2px; font-weight: 500; }
+
+  /* ABOUT */
+  .about {
+    padding: 100px 7%;
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .about-img { width: 100%; border-radius: 24px; object-fit: cover; }
+  .section-tag {
+    display: inline-block;
+    background: var(--teal-light); color: var(--teal);
+    padding: 6px 16px; border-radius: 50px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800; color: var(--dark);
+    line-height: 1.2; letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  .section-text { color: var(--text-light); font-size: 16px; line-height: 1.7; margin-bottom: 36px; }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--dark);
+  }
+  .stat-card {
+    background: var(--dark2);
+    padding: 40px 30px;
+    text-align: center;
+  }
+  .stat-card:nth-child(odd) { background: var(--dark); }
+  .stat-num { font-size: 48px; font-weight: 800; color: var(--teal); line-height: 1; }
+  .stat-label1 { color: #fff; font-size: 14px; font-weight: 600; margin-top: 6px; }
+  .stat-label2 { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 2px; }
+
+  /* SERVICES */
+  .services { padding: 100px 7%; background: var(--bg); }
+  .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 50px; }
+  .service-list { display: flex; flex-direction: column; gap: 0; }
+  .service-card {
+    display: grid; grid-template-columns: 60px 1fr auto 260px;
+    gap: 30px; align-items: center;
+    padding: 36px 40px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    transition: background .2s;
+    cursor: pointer;
+  }
+  .service-card:first-child { border-radius: 16px 16px 0 0; }
+  .service-card:last-child { border-radius: 0 0 16px 16px; border-bottom: none; }
+  .service-card:hover { background: var(--dark); }
+  .service-card:hover .svc-num, .service-card:hover .svc-title, .service-card:hover .svc-feat { color: #fff; }
+  .service-card:hover .svc-feat-icon { filter: brightness(5); }
+  .svc-num { font-size: 13px; font-weight: 700; color: var(--teal); }
+  .svc-title { font-size: 20px; font-weight: 700; color: var(--dark); }
+  .svc-desc { font-size: 14px; color: var(--text-light); margin-top: 4px; }
+  .svc-features { display: flex; flex-direction: column; gap: 8px; }
+  .svc-feat { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text); }
+  .svc-feat-icon { width: 18px; height: 18px; }
+  .svc-img { width: 100%; height: 120px; object-fit: cover; border-radius: 12px; }
+
+  /* PROCESS */
+  .process { padding: 100px 7%; background: var(--white); }
+  .process-grid { display: grid; grid-template-columns: 300px 1fr; gap: 60px; margin-top: 60px; }
+  .process-steps { display: flex; flex-direction: column; gap: 0; }
+  .process-step {
+    padding: 24px 28px;
+    border-left: 3px solid var(--border);
+    cursor: pointer; transition: all .2s;
+    position: relative;
+  }
+  .process-step.active { border-left-color: var(--teal); background: var(--teal-light); border-radius: 0 12px 12px 0; }
+  .process-step-num { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .process-step-title { font-size: 16px; font-weight: 700; color: var(--dark); }
+  .process-content { display: none; flex-direction: column; gap: 24px; }
+  .process-content.show { display: flex; }
+  .process-img { width: 100%; border-radius: 20px; object-fit: cover; max-height: 340px; }
+  .process-content-title { font-size: 28px; font-weight: 800; color: var(--dark); }
+  .process-desc { color: var(--text-light); font-size: 15px; line-height: 1.7; }
+  .process-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .process-list-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 500; color: var(--dark);
+  }
+  .process-list-item::before { content: '✓'; color: var(--teal); font-weight: 700; }
+
+  /* GALLERY / WHY */
+  .gallery { padding: 100px 7%; background: var(--dark); }
+  .gallery-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .gallery-features { display: flex; flex-direction: column; gap: 28px; }
+  .gallery-feature { display: flex; gap: 16px; }
+  .gallery-feature-icon { width: 44px; height: 44px; flex-shrink: 0; }
+  .gallery-feature-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .gallery-feature-text { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6; }
+  .gallery-video {
+    width: 100%; aspect-ratio: 16/10;
+    border-radius: 20px; overflow: hidden;
+    background: var(--dark2);
+    position: relative;
+  }
+  .gallery-video video { width: 100%; height: 100%; object-fit: cover; }
+
+  /* TEAM */
+  .team { padding: 100px 7%; background: var(--bg); }
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+  .team-card { background: var(--white); border-radius: 20px; overflow: hidden; position: relative; }
+  .team-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+  .team-info { padding: 20px 22px 22px; }
+  .team-name { font-size: 18px; font-weight: 700; color: var(--dark); }
+  .team-role { font-size: 13px; color: var(--teal); font-weight: 600; margin-top: 2px; }
+  .team-socials { display: flex; gap: 10px; margin-top: 14px; }
+  .team-socials a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); text-decoration: none; transition: background .2s; }
+  .team-socials a:hover { background: var(--teal); border-color: var(--teal); }
+  .team-socials img { width: 14px; height: 14px; }
+
+  /* APPOINTMENT FORM */
+  .appointment { padding: 100px 7%; background: var(--dark); }
+  .appt-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; }
+  .appt-tag { display: inline-block; background: rgba(10,191,181,0.15); color: var(--teal); padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+  .appt-title { font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; color: #fff; line-height: 1.2; letter-spacing: -1px; margin-bottom: 36px; }
+  .appt-logos { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .appt-logo { width: 80px; height: 40px; object-fit: contain; opacity: 0.6; filter: brightness(5); }
+  .appt-form { background: var(--white); border-radius: 24px; padding: 36px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 13px; font-weight: 600; color: var(--dark); }
+  .form-group input, .form-group select {
+    padding: 13px 16px; border: 1.5px solid var(--border);
+    border-radius: 10px; font-size: 14px; color: var(--dark);
+    font-family: inherit; outline: none;
+    transition: border-color .2s;
+  }
+  .form-group input:focus, .form-group select:focus { border-color: var(--teal); }
+  .form-full { margin-bottom: 16px; }
+  .btn-form {
+    width: 100%; padding: 16px;
+    background: var(--teal); color: #fff;
+    border: none; border-radius: 50px;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: background .2s;
+  }
+  .btn-form:hover { background: #089991; }
+
+  /* TESTIMONIALS */
+  .testimonials { padding: 100px 7%; background: var(--bg); }
+  .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+  .test-card { background: var(--white); border-radius: 20px; padding: 28px; position: relative; }
+  .test-card-img { width: 100%; height: 180px; object-fit: cover; border-radius: 14px; margin-bottom: 20px; }
+  .test-stars { color: var(--teal); font-size: 14px; margin-bottom: 10px; }
+  .test-subtitle { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 10px; line-height: 1.4; }
+  .test-text { font-size: 14px; color: var(--text-light); line-height: 1.7; }
+  .test-author { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .test-author img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+  .test-author-name { font-size: 14px; font-weight: 700; color: var(--dark); }
+  .test-author-role { font-size: 12px; color: var(--text-light); }
+
+  /* BLOG */
+  .blog { padding: 100px 7%; background: var(--white); }
+  .blog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 50px; }
+  .blog-card { text-decoration: none; display: block; }
+  .blog-tag { display: inline-block; background: var(--teal-light); color: var(--teal); padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px; }
+  .blog-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; margin-bottom: 14px; transition: transform .3s; }
+  .blog-card:hover img { transform: scale(1.02); }
+  .blog-title { font-size: 16px; font-weight: 700; color: var(--dark); line-height: 1.4; }
+  .blog-title:hover { color: var(--teal); }
+
+  /* FOOTER */
+  footer { background: var(--dark); padding: 80px 7% 30px; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .footer-desc { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.7; margin-top: 16px; margin-bottom: 24px; }
+  .footer-email {
+    display: flex; gap: 0;
+    background: rgba(255,255,255,0.08); border-radius: 50px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .footer-email input {
+    flex: 1; padding: 12px 16px; background: transparent;
+    border: none; outline: none; color: #fff; font-size: 13px; font-family: inherit;
+  }
+  .footer-email input::placeholder { color: rgba(255,255,255,0.4); }
+  .footer-email button {
+    padding: 10px 20px; background: var(--teal);
+    border: none; border-radius: 50px; color: #fff;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+    margin: 4px; transition: background .2s;
+  }
+  .footer-email button:hover { background: #089991; }
+  .footer-col h5 { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color .2s; }
+  .footer-col ul a:hover { color: var(--teal); }
+  .footer-contact-item { display: flex; flex-direction: column; gap: 2px; margin-bottom: 16px; }
+  .footer-contact-item span { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .footer-contact-item a { color: rgba(255,255,255,0.8); font-size: 14px; text-decoration: none; }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; }
+  .footer-copy { color: rgba(255,255,255,0.4); font-size: 13px; }
+  .footer-copy a { color: var(--teal); text-decoration: none; }
+  .footer-logo img { height: 32px; }
+  .footer-socials { display: flex; gap: 12px; }
+  .footer-socials a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; transition: all .2s; text-decoration: none; }
+  .footer-socials a:hover { background: var(--teal); border-color: var(--teal); }
+  .footer-socials img { width: 15px; height: 15px; filter: brightness(5); }
+
+  @media (max-width: 900px) {
+    .hero, .about, .gallery-inner, .appt-inner { grid-template-columns: 1fr; }
+    .hero-right { height: 60vw; }
+    .hero-img { border-radius: 20px; width: 100%; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .team-grid, .test-grid { grid-template-columns: 1fr 1fr; }
+    .blog-grid { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .service-card { grid-template-columns: 40px 1fr; }
+    .svc-features, .svc-img { display: none; }
+    .process-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68d767a70fb701063aafefc9_Logo.svg" alt="Oralix Logo">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#team">Doctors</a></li>
+    <li><a href="#blog">Blog</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#appointment" class="nav-contact">Contact</a>
+    <a href="#services" class="btn-primary">Get Started <span class="arrow">↗</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a6efce232db0fc453ad8f3_Frame%201000004967.png" alt="" class="hero-badge-icon">
+      <span>Top Dentists & Tech</span>
+    </div>
+    <h1 class="hero-title"><span id="heroType" class="typewriter" data-text="Brighten Your Smile Today"></span></h1>
+    <div class="hero-features">
+      <div class="hero-feature">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a6efce232db0fc453ad8f3_Frame%201000004967.png" alt="" class="hero-feature-icon">
+        <div class="hero-feature-text">
+          <h4>Top Dentists & Tech</h4>
+          <p>Our experienced professionals use the latest tools to deliver precision care.</p>
+        </div>
+      </div>
+      <div class="hero-feature">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68c841fb3e6e43cb7cb1fdac_02222.svg" alt="" class="hero-feature-icon">
+        <div class="hero-feature-text">
+          <h4>Gentle Dental Care</h4>
+          <p>We focus on comfort while ensuring healthy, confident smiles. Get ready for treatments that won't hurt and a smile you'll totally adore!</p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#appointment" class="btn-hero">Make an Appointment ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+   
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">$8B+</div><div class="hero-stat-label">Managed Practices</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">65</div><div class="hero-stat-label">IPO Portfolio</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">100+</div><div class="hero-stat-label">Active Holdings</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <img src="Screenshot 2026-03-16 164547.png" alt="About Oralix" class="about-img">
+  <div>
+    <span class="section-tag">Who are we?</span>
+    <h2 class="section-title">At Oralix, we believe everyone deserves a confident smile.</h2>
+    <p class="section-text">Our skilled team offers personalized care in a comfortable setting, using the latest technology for optimal results.</p>
+    <a href="#" class="btn-primary">About Oralix ↗</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-num">$8B+</div>
+    <div class="stat-label1">Managed Dental</div>
+    <div class="stat-label2">Practices</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">65</div>
+    <div class="stat-label1">Successful</div>
+    <div class="stat-label2">Dental IPO Portfolio</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">100+</div>
+    <div class="stat-label1">Active Dental</div>
+    <div class="stat-label2">Holdings</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">175</div>
+    <div class="stat-label1">Dental</div>
+    <div class="stat-label2">Marketing Association (DMA)</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">Service</span>
+      <h2 class="section-title">Our Services</h2>
+    </div>
+    <a href="#" class="btn-primary">See All Services ↗</a>
+  </div>
+  <div class="service-list">
+    <a class="service-card" href="#">
+      <div class="svc-num">01</div>
+      <div>
+        <div class="svc-title">Pediatric Dentistry</div>
+        <div class="svc-desc">Protect your teeth with regular cleanings, fluoride treatments, and check-ups.</div>
+      </div>
+      <div class="svc-features">
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Dental Exams &amp; Cleanings</div>
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Dental Exams &amp; Cleanings</div>
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Fluoride &amp; Sealants for Kids</div>
+      </div>
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68ca168f4f1b049e5ee267bd_ccxc.avif" alt="Pediatric" class="svc-img">
+    </a>
+    <a class="service-card" href="#">
+      <div class="svc-num">02</div>
+      <div>
+        <div class="svc-title">Cosmetic Dentistry</div>
+        <div class="svc-desc">We've got fillings, crowns, and implants to help you get your smile back and feel great!</div>
+      </div>
+      <div class="svc-features">
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Enhance Your Smile with Expert Care</div>
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Benefits of Cosmetic Dentistry</div>
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Porcelain Veneers</div>
+      </div>
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68ca1979a74e35fd7bcaeb83_02.avif" alt="Cosmetic" class="svc-img">
+    </a>
+    <a class="service-card" href="#">
+      <div class="svc-num">03</div>
+      <div>
+        <div class="svc-title">Restorative Dentistry</div>
+        <div class="svc-desc">Make your smile shine with some whitening, veneers, and a bunch of other cool options!</div>
+      </div>
+      <div class="svc-features">
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Comprehensive Care for Your Smile</div>
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Fillings and Crowns for Lasting Health</div>
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Fluoride Sealants for Children</div>
+      </div>
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68ca199c02c99e9bf87f3972_03.avif" alt="Restorative" class="svc-img">
+    </a>
+    <a class="service-card" href="#">
+      <div class="svc-num">04</div>
+      <div>
+        <div class="svc-title">Orthodontics Care</div>
+        <div class="svc-desc">Achieve a great smile with classic metal braces or discreet clear aligners!</div>
+      </div>
+      <div class="svc-features">
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Orthodontic Checkups &amp; Cleanings</div>
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Orthodontic Assessments &amp; Hygiene</div>
+        <div class="svc-feat"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a766496011def7660b019d_Frame.png" class="svc-feat-icon" alt=""> Braces &amp; Sealants for Kids</div>
+      </div>
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68ca19dd403a2267a5ec12bc_04I.avif" alt="Orthodontics" class="svc-img">
+    </a>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div>
+    <span class="section-tag">Our Process</span>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;">
+      <h2 class="section-title" style="max-width:500px">Working Process</h2>
+      <p style="max-width:380px;color:var(--text-light);font-size:15px;line-height:1.6;margin-bottom:8px">From your first visit to your final check-up, we simplify dental care. Our team ensures you achieve the smile you deserve—hassle-free.</p>
+    </div>
+  </div>
+  <div class="process-grid">
+    <div class="process-steps" id="processTabs">
+      <div class="process-step active" data-tab="0">
+        <div class="process-step-num">01</div>
+        <div class="process-step-title">Schedule Your Appointment</div>
+      </div>
+      <div class="process-step" data-tab="1">
+        <div class="process-step-num">02</div>
+        <div class="process-step-title">Consultation & Assessment</div>
+      </div>
+      <div class="process-step" data-tab="2">
+        <div class="process-step-num">03</div>
+        <div class="process-step-title">Personalized Treatment Plan</div>
+      </div>
+      <div class="process-step" data-tab="3">
+        <div class="process-step-num">04</div>
+        <div class="process-step-title">Treatment & Follow-Up</div>
+      </div>
+    </div>
+    <div>
+      <div class="process-content show" data-content="0">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a837ef7e5b4d90ac717ea0_Rectangle%2023.webp" alt="" class="process-img">
+        <div class="process-content-title">Schedule Your Appointment</div>
+        <p class="process-desc">Don't wait to give your smile the care it deserves. Whether it's a routine check-up, cosmetic treatment, or dental emergency — our expert team is here for you. Book your visit in just a few clicks and experience personalized dental care in a comfortable, modern setting.</p>
+        <div class="process-list">
+          <div class="process-list-item">Easy online booking</div>
+          <div class="process-list-item">Flexible timings to fit your schedule</div>
+          <div class="process-list-item">Friendly, expert dental professionals</div>
+          <div class="process-list-item">Same-day or next-day appointments available</div>
+        </div>
+        <div><a href="#appointment" class="btn-primary">Make an Appointment ↗</a></div>
+      </div>
+      <div class="process-content" data-content="1">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68abf3affb664dbdc698e28f_Rectangle%2024.webp" alt="" class="process-img">
+        <div class="process-content-title">Consultation & Assessment</div>
+        <p class="process-desc">Your journey to a healthy, beautiful smile starts with a thorough consultation and assessment. Our experienced dental team will evaluate your oral health, discuss your concerns, and create a personalized treatment plan just for you.</p>
+        <div class="process-list">
+          <div class="process-list-item">Identify any dental issues early.</div>
+          <div class="process-list-item">Personalized Guidance</div>
+          <div class="process-list-item">Friendly & Professional Care</div>
+          <div class="process-list-item">Advanced Diagnostic Tools</div>
+        </div>
+        <div><a href="#appointment" class="btn-primary">Make an Appointment ↗</a></div>
+      </div>
+      <div class="process-content" data-content="2">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68c8cf21ee9a56539d76c233_csdsds.avif" alt="" class="process-img">
+        <div class="process-content-title">Personalized Treatment Plan</div>
+        <p class="process-desc">Don't wait to give your smile the care it deserves. Whether it's a routine check-up, cosmetic treatment, or dental emergency — our expert team is here for you. Book your visit in just a few clicks and experience personalized dental care in a comfortable, modern setting.</p>
+        <div class="process-list">
+          <div class="process-list-item">Customized Solutions</div>
+          <div class="process-list-item">Clear & Transparent Plan</div>
+          <div class="process-list-item">Comfort-Focused Care</div>
+          <div class="process-list-item">Optimized Results</div>
+        </div>
+        <div><a href="#appointment" class="btn-primary">Make an Appointment ↗</a></div>
+      </div>
+      <div class="process-content" data-content="3">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68abf3c9ecd1967e249cda2b_Frame%201707481975.webp" alt="" class="process-img">
+        <div class="process-content-title">Treatment & Follow-Up</div>
+        <p class="process-desc">Our commitment doesn't end with your procedure. From routine treatments to advanced dental care, we ensure every step is carefully managed, and your recovery is closely monitored for optimal results.</p>
+        <div class="process-list">
+          <div class="process-list-item">Expert Treatment</div>
+          <div class="process-list-item">Post-Treatment Guidance</div>
+          <div class="process-list-item">Ongoing Care</div>
+          <div class="process-list-item">Patient-Centered Approach</div>
+        </div>
+        <div><a href="#appointment" class="btn-primary">Make an Appointment ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY / WHY CHOOSE US -->
+<section class="gallery">
+  <div style="margin-bottom:50px">
+    <span class="section-tag" style="background:rgba(10,191,181,0.15);color:var(--teal)">Why choose us</span>
+    <h2 class="section-title" style="color:#fff">Before &amp; After Gallery.</h2>
+  </div>
+  <div class="gallery-inner">
+    <div class="gallery-features">
+      <div class="gallery-feature">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9561178190110391ec676_Featured%20icon.png" alt="" class="gallery-feature-icon">
+        <div>
+          <div class="gallery-feature-title">Free consultation</div>
+          <p class="gallery-feature-text">At Oralix, your safety is our priority. Our expert team employs advanced techniques to understand your goals and needs.</p>
+        </div>
+      </div>
+      <div class="gallery-feature">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9561178190110391ec676_Featured%20icon.png" alt="" class="gallery-feature-icon">
+        <div>
+          <div class="gallery-feature-title">Patient Safety & Quality Treatment</div>
+          <p class="gallery-feature-text">At Oralix, patient safety is key. Our skilled team uses advanced techniques to ensure your comfort and keep your smile confident.</p>
+        </div>
+      </div>
+      <div class="gallery-feature">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a956e97e8e89746c60318e_Featured%20icon%20(1).png" alt="" class="gallery-feature-icon">
+        <div>
+          <div class="gallery-feature-title">Smiles Made Simple!</div>
+          <p class="gallery-feature-text">Feeling anxious about your dental visit? Our friendly dentists ensure a stress-free experience, whether it's a checkup or a more complex procedure.</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-video">
+      <video autoplay muted loop playsinline>
+        <source src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38%2F68b24af60349c9a3857a58ba_0_Teeth_Mouth_3840x2160%20%281%29-transcode.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">Our Team</span>
+      <h2 class="section-title">Team Members</h2>
+    </div>
+    <a href="#" class="btn-primary">All Members ↗</a>
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68c8db32c68d02337a882dba_01.avif" alt="Dr. Claire Moreau">
+      <div class="team-info">
+        <div class="team-name">Dr. Claire Moreau</div>
+        <div class="team-role">Dental Practice Director</div>
+        <div class="team-socials">
+          <a href="#"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9830e605478a79e8e2228_Layer%202.png" alt="LinkedIn"></a>
+          <a href="#"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9834b4ce7f2197d074a83_Group.png" alt="Social"></a>
+        </div>
+      </div>
+    </div>
+    <div class="team-card">
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68c8db64d3e11d6385df89f4_03.avif" alt="Dr. Julien Lefèvre">
+      <div class="team-info">
+        <div class="team-name">Dr. Julien Lefèvre</div>
+        <div class="team-role">Lead Dentist</div>
+        <div class="team-socials">
+          <a href="#"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9830e605478a79e8e2228_Layer%202.png" alt="LinkedIn"></a>
+          <a href="#"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9834b4ce7f2197d074a83_Group.png" alt="Social"></a>
+        </div>
+      </div>
+    </div>
+    <div class="team-card">
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68c8dbc94ec60e3db45882ab_05.avif" alt="Dr. Juliana Craft">
+      <div class="team-info">
+        <div class="team-name">Dr. Juliana Craft</div>
+        <div class="team-role">Chief Dental Officer</div>
+        <div class="team-socials">
+          <a href="#"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9830e605478a79e8e2228_Layer%202.png" alt="LinkedIn"></a>
+          <a href="#"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9834b4ce7f2197d074a83_Group.png" alt="Social"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section class="appointment" id="appointment">
+  <div class="appt-inner">
+    <div>
+      <div class="appt-tag">Appointment</div>
+      <h2 class="appt-title">Get the Smile You Deserve Today!</h2>
+      <a href="#" class="btn-primary" style="margin-bottom:40px;display:inline-flex">Make an Appointment ↗</a>
+      <div class="appt-logos">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9a360bc2d755cc81718bf_image%2030.png" alt="" class="appt-logo">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9a9c2a97b5e0f240aff9a_image%2030%20(2).png" alt="" class="appt-logo">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9a9ae0f8df4cb22a89c19_image%2030%20(4).png" alt="" class="appt-logo">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9a99c3008cdec5eb2f320_image%2030%20(6).png" alt="" class="appt-logo">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9a9899bb1281384105e97_image%2030%20(5).png" alt="" class="appt-logo">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9a9760ac6aa428d874f76_image%2030%20(7).png" alt="" class="appt-logo">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9a96090c4c0da51f5470e_image%2030%20(3).png" alt="" class="appt-logo">
+      </div>
+    </div>
+    <div class="appt-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Name*</label>
+          <input type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Email*</label>
+          <input type="email" placeholder="Your email">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Department*</label>
+          <select>
+            <option>Select one...</option>
+            <option>Teeth Whitening</option>
+            <option>Root Canal Treatment</option>
+            <option>Dental Implants</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Date*</label>
+          <input type="date">
+        </div>
+      </div>
+      <button class="btn-form">Make an Appointment ↗</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">Client Testimonials & Reviews</span>
+      <h2 class="section-title">Clients Feedback</h2>
+    </div>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68ca1c6f405965c45938839b_04.avif" alt="" class="test-card-img">
+      <div class="test-stars">★★★★★</div>
+      <div class="test-subtitle">Oralix completely transformed my smile and boosted my confidence significantly.</div>
+      <p class="test-text">Oralix turned my dental anxiety into a comfortable, positive experience. The team was incredibly professional and caring, taking the time to explain every step of my treatment. The clinic is modern and welcoming, and they made sure I was happy with the results. I finally love my smile!</p>
+      <div class="test-author">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68ca1c6f405965c45938839b_04.avif" alt="">
+        <div>
+          <div class="test-author-name">Devon Lane</div>
+          <div class="test-author-role">Marketing Coordinator</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68ca247258a8292c9983de44_0554445.avif" alt="" class="test-card-img">
+      <div class="test-stars">★★★★★</div>
+      <div class="test-subtitle">My new veneers look so natural! I've been getting compliments on my smile constantly thanks to Oralix.</div>
+      <p class="test-text">Choosing Oralix for my orthodontic treatment was the best decision. They took my goals for a straighter smile and created a perfect treatment plan. The team's expertise and support were evident at every appointment. They were always there to answer my questions and made the whole process seamless.</p>
+      <div class="test-author">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9d001a97b5e0f24103aaf_Rectangle%209%20(1).png" alt="">
+        <div>
+          <div class="test-author-name">Guy Hawkins</div>
+          <div class="test-author-role">President of Sales</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68ca1bedf0ae177bce789ec3_03.avif" alt="" class="test-card-img">
+      <div class="test-stars">★★★★★</div>
+      <div class="test-subtitle">I couldn't be happier with the cosmetic dentistry and overall care I received at Oralix.</div>
+      <p class="test-text">The team at Oralix exceeded my expectations. They didn't just fix my immediate issue; they created a comprehensive care plan that has dramatically improved my overall oral health. Their modern approach and friendly staff make every visit a pleasure.</p>
+      <div class="test-author">
+        <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a9d0cb3609446c28492059_Rectangle%209%20(2).png" alt="">
+        <div>
+          <div class="test-author-name">Kristin Watson</div>
+          <div class="test-author-role">Web Designer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">Blog</span>
+      <h2 class="section-title">Our Blog</h2>
+    </div>
+    <a href="#" class="btn-primary">Read More Post ↗</a>
+  </div>
+  <div class="blog-grid">
+    <a class="blog-card" href="#">
+      <span class="blog-tag">Orthodontics</span>
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68c90b62605fdda749923f04_01.avif" alt="Blog 1">
+      <div class="blog-title">The Benefits of Early Orthodontic Checkups for Kids</div>
+    </a>
+    <a class="blog-card" href="#">
+      <span class="blog-tag">Dental Implants</span>
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68c90b81793b2b8bc19620eb_02.avif" alt="Blog 2">
+      <div class="blog-title">How Dental Implants Improve Oral Health Long-Term</div>
+    </a>
+    <a class="blog-card" href="#">
+      <span class="blog-tag">Cosmetic Dentistry</span>
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68c90ba5b7a2ebaf99f964ea_03.avif" alt="Blog 3">
+      <div class="blog-title">Simple Cosmetic Dentistry Options for Everyday Smiles</div>
+    </a>
+    <a class="blog-card" href="#">
+      <span class="blog-tag">Root Canal</span>
+      <img src="https://cdn.prod.website-files.com/68a751dda10829b4dc00adab/68c90bcff4d84651d9140fc0_04.avif" alt="Blog 4">
+      <div class="blog-title">Common Myths About Root Canal Treatments Explained</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68d767a70fb701063aafefc9_Logo.svg" alt="Oralix" style="height:36px">
+      <p class="footer-desc">At Oralix, your safety is our priority. Our expert team employs advanced techniques to understand your goals.</p>
+      <div class="footer-email">
+        <input type="email" placeholder="Enter your email">
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Doctors</a></li>
+        <li><a href="#">Career</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Utility Pages</h5>
+      <ul>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">License</a></li>
+        <li><a href="#">Password</a></li>
+        <li><a href="#">Style Guide</a></li>
+        <li><a href="#">404</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Get In Touch</h5>
+      <div class="footer-contact-item">
+        <a href="tel:(480)555-0103">(480) 555-0103</a>
+        <span>Mon - Fri, 5am - 6pm PST</span>
+      </div>
+      <div class="footer-contact-item">
+        <a href="mailto:hello@oralix.com">hello@oralix.com</a>
+      </div>
+      <div class="footer-contact-item">
+        <span>California L.A 57867</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">Copyright &amp; design by <a href="https://reddevs.com/">©RedDevs</a> - 2025. Powered by <a href="https://webflow.com/">Webflow</a></div>
+    <a href="#" class="footer-logo"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68d767a70fb701063aafefc9_Logo.svg" alt="Oralix"></a>
+    <div class="footer-socials">
+      <a href="https://facebook.com"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a6b8ebdcafedeb2476dd72_facebook-f.png" alt="Facebook"></a>
+      <a href="https://x.com"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68c83fae9346359542f42824_twitter.svg" alt="Twitter"></a>
+      <a href="https://youtube.com"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a6b8ebdcafedeb2476dd6c_youtube.png" alt="YouTube"></a>
+      <a href="https://behance.com"><img src="https://cdn.prod.website-files.com/68a6ab81292d1af1b4de5a38/68a6b8ebdcafedeb2476dd6f_behance.png" alt="Behance"></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Typewriter effect for hero headline
+  (function () {
+    const el = document.getElementById('heroType');
+    if (!el) return;
+    const text = el.dataset.text || '';
+    let idx = 0;
+    const speed = 80;
+
+    function type() {
+      el.textContent = text.slice(0, idx);
+      idx += 1;
+      if (idx <= text.length) {
+        setTimeout(type, speed);
+      }
+    }
+
+    type();
+  })();
+
+  // Process tabs
+  const tabs = document.querySelectorAll('.process-step');
+  const contents = document.querySelectorAll('.process-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('show'));
+      tab.classList.add('active');
+      document.querySelector(`.process-content[data-content="${tab.dataset.tab}"]`).classList.add('show');
+    });
+  });
+</script>
+</body>
+</html>
