@@ -67,6 +67,39 @@
   }
   .btn-outline:hover { background: var(--teal); color: #fff; }
 
+  /* Mobile Nav */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--dark);
+    margin: 3px 0;
+    transition: 0.3s;
+  }
+  .nav-links.mobile {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 5%;
+    gap: 20px;
+  }
+  .nav-links.mobile a {
+    font-size: 16px;
+  }
+
   /* HERO */
   .hero {
     padding-top: 76px;
@@ -376,6 +409,89 @@
     .process-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
   }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-right { gap: 15px; }
+    .hero-left { padding: 60px 5% 60px 5%; }
+    .hero-title { font-size: clamp(36px, 8vw, 56px); }
+    .hero-features { gap: 12px; margin-bottom: 30px; }
+    .hero-feature { padding: 14px 18px; }
+    .hero-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .service-list { gap: 20px; }
+    .service-card { padding: 28px 30px; }
+    .process-steps { gap: 20px; }
+    .gallery-features { gap: 24px; }
+    .appt-inner { gap: 60px; }
+    .appt-logos { gap: 12px; }
+    .appt-logo { width: 60px; height: 30px; }
+    .test-grid { grid-template-columns: 1fr; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 480px) {
+    nav { padding: 0 15px; height: 70px; }
+    .nav-logo img { height: 32px; }
+    .btn-primary, .btn-outline { padding: 10px 18px; font-size: 13px; }
+    .hero { padding-top: 70px; }
+    .hero-left { padding: 50px 5% 50px 5%; }
+    .hero-badge { margin-bottom: 24px; }
+    .hero-title { font-size: clamp(32px, 9vw, 48px); margin-bottom: 24px; }
+    .hero-features { gap: 10px; margin-bottom: 24px; }
+    .hero-feature { padding: 12px 16px; }
+    .hero-feature-icon { width: 32px; height: 32px; }
+    .hero-feature-text h4 { font-size: 13px; }
+    .hero-feature-text p { font-size: 12px; }
+    .hero-cta { gap: 10px; }
+    .btn-hero { padding: 14px 24px; font-size: 14px; }
+    .section-title { font-size: clamp(24px, 6vw, 36px); }
+    .section-text { font-size: 15px; }
+    .stats-row { grid-template-columns: 1fr; }
+    .stat-card { padding: 30px 20px; }
+    .stat-num { font-size: 40px; }
+    .service-card { padding: 24px 20px; }
+    .svc-title { font-size: 18px; }
+    .svc-desc { font-size: 13px; }
+    .process-step { padding: 20px 24px; }
+    .process-step-title { font-size: 15px; }
+    .process-content-title { font-size: 24px; }
+    .process-desc { font-size: 14px; }
+    .gallery-feature { gap: 14px; }
+    .gallery-feature-title { font-size: 16px; }
+    .gallery-feature-text { font-size: 13px; }
+    .team-grid { grid-template-columns: 1fr; }
+    .team-card { border-radius: 16px; }
+    .team-info { padding: 16px 18px 18px; }
+    .team-name { font-size: 16px; }
+    .team-role { font-size: 12px; }
+    .appt-title { font-size: clamp(24px, 6vw, 36px); margin-bottom: 28px; }
+    .appt-form { padding: 28px; }
+    .form-row { gap: 12px; margin-bottom: 12px; }
+    .form-group input, .form-group select { padding: 11px 14px; font-size: 13px; }
+    .btn-form { padding: 14px; font-size: 14px; }
+    .test-card { padding: 24px; }
+    .test-subtitle { font-size: 14px; }
+    .test-text { font-size: 13px; }
+    .test-author-name { font-size: 13px; }
+    .test-author-role { font-size: 11px; }
+    .blog-card img { aspect-ratio: 5/3; }
+    .blog-title { font-size: 15px; }
+    .footer-top { padding: 60px 5% 40px; }
+    .footer-desc { font-size: 13px; }
+    .footer-email input { padding: 10px 14px; font-size: 12px; }
+    .footer-email button { padding: 8px 16px; font-size: 11px; }
+    .footer-col h5 { font-size: 14px; margin-bottom: 16px; }
+    .footer-col ul a { font-size: 13px; }
+    .footer-contact-item span { font-size: 11px; }
+    .footer-contact-item a { font-size: 13px; }
+    .footer-bottom { padding-top: 24px; flex-direction: column; gap: 20px; align-items: flex-start; }
+    .footer-copy { font-size: 12px; }
+    .footer-socials { gap: 10px; }
+  }
 </style>
 </head>
 <body>
@@ -395,6 +511,11 @@
   <div class="nav-right">
     <a href="#appointment" class="nav-contact">Contact</a>
     <a href="#services" class="btn-primary">Get Started <span class="arrow">↗</span></a>
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </nav>
 
@@ -909,6 +1030,13 @@
 
     type();
   })();
+
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('mobile');
+  });
 
   // Process tabs
   const tabs = document.querySelectorAll('.process-step');
